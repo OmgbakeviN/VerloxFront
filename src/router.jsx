@@ -3,6 +3,7 @@ import { createRouter, createRootRoute, createRoute } from '@tanstack/react-rout
 import App from './App'
 import Home from './pages/Home'
 import Health from './pages/Health'
+import Company from './pages/Company'
 
 const rootRoute = createRootRoute({
   component: () => <App />,
@@ -20,7 +21,13 @@ const healthRoute = createRoute({
   component: Health,
 })
 
-const routeTree = rootRoute.addChildren([indexRoute, healthRoute])
+const companyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/company/$symbol',
+  component: Company,
+})
+
+const routeTree = rootRoute.addChildren([indexRoute, healthRoute, companyRoute])
 
 export const router = createRouter({ routeTree })
 
