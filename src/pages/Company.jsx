@@ -2,6 +2,7 @@ import { useParams } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import api from '../api/client'
 import LiveChart from '../components/LiveChart'
+import TradeForm from '../components/TradeForm'
 
 export default function Company() {
   const { symbol } = useParams({ from: '/company/$symbol' })
@@ -13,6 +14,10 @@ export default function Company() {
       return res.data
     },
   })
+  const onTradeCreated = () => {
+    // Ici, tu pourras rafraîchir les trades ouverts (quand on aura la page/panneau jour 6)
+    // Par exemple: queryClient.invalidateQueries({ queryKey: ['trades', 'OPEN'] })
+  }
 
   if (isLoading) return <p>Chargement…</p>
   if (isError) return <p>Erreur : entreprise introuvable.</p>
@@ -31,7 +36,8 @@ export default function Company() {
 
       {/* Formulaire de trade viendra Jour 5 */}
       <div style={{ border: '1px dashed #ccc', borderRadius: 12, padding: 24, marginTop: 16 }}>
-        <em>Formulaire de trade (à venir Jour 5)</em>
+        <h3>Placer un trade</h3>
+        <TradeForm companyId={data.id} onCreated={onTradeCreated} />
       </div>
     </div>
   )
