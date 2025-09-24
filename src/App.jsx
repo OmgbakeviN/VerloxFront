@@ -10,7 +10,7 @@ export default function App() {
         <h1 style={{ marginRight: 'auto' }}>VerloxMarket</h1>
         <Link to="/">Home</Link>
         <Link to="/health">API Health</Link>
-
+        <Link to="/history">History</Link>
         {user ? (
           <>
             <span style={{ fontSize: 14, opacity: 0.8 }}>

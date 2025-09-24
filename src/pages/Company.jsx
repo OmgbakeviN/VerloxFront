@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import api from '../api/client'
 import LiveChart from '../components/LiveChart'
 import TradeForm from '../components/TradeForm'
+import OpenTradesPanel from '../components/OpenTradesPanel'
 
 export default function Company() {
   const { symbol } = useParams({ from: '/company/$symbol' })
@@ -38,6 +39,9 @@ export default function Company() {
       <div style={{ border: '1px dashed #ccc', borderRadius: 12, padding: 24, marginTop: 16 }}>
         <h3>Placer un trade</h3>
         <TradeForm companyId={data.id} onCreated={onTradeCreated} />
+        <div style={{ border: '1px solid #eee', borderRadius: 12, padding: 16, marginTop: 16 }}>
+          <OpenTradesPanel />
+        </div>
       </div>
     </div>
   )

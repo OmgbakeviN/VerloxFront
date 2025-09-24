@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Health from './pages/Health'
 import Company from './pages/Company'
 import Login from './pages/Login'
+import History from './pages/History'
 import { useAuth } from './auth/AuthProvider'
 
 // Garde simple: composant wrapper
@@ -46,7 +47,17 @@ const companyRoute = createRoute({
   component: Company,
 })
 
-const routeTree = rootRoute.addChildren([indexRoute, loginRoute, healthRoute, companyRoute])
+const historyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/history',
+  component: () => (
+    <RequireAuth>
+      <History />
+    </RequireAuth>
+  ),
+})
+
+const routeTree = rootRoute.addChildren([indexRoute, loginRoute, healthRoute, companyRoute, historyRoute])
 
 export const router = createRouter({ routeTree })
 
