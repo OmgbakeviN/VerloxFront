@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { useAuth } from '../auth/AuthProvider'
 import api from '../api/client'
 
 export default function TradeForm({ companyId, onCreated }) {
+  const { fetchMe } = useAuth()
   const [direction, setDirection] = useState('UP')         // UP / DOWN
   const [stake, setStake] = useState(1000)                 // montant
   const [duration, setDuration] = useState(60)             // 60 / 300 / 900
@@ -20,6 +22,9 @@ export default function TradeForm({ companyId, onCreated }) {
         duration_sec: Number(duration),
       })
       setMsg({ type: 'success', text: 'Trade créé avec succès.' })
+
+      await fetchMe()
+
       onCreated?.(res.data)
     } catch (err) {
       const detail = err?.response?.data
