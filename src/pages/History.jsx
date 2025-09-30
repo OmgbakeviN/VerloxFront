@@ -8,6 +8,11 @@ export default function History() {
     refetchOnWindowFocus: true,
   })
 
+  function fmt(dt) {
+    const d = new Date(dt)
+    return d.toLocaleTimeString()
+  }
+
   if (isLoading) return <p>Chargement de l’historique…</p>
   if (isError) return <p>Erreur: impossible de charger l’historique.</p>
 
@@ -24,12 +29,12 @@ export default function History() {
                 <strong>{tr.company_symbol} — {tr.direction}</strong>
                 <span style={{ color: isWin ? '#24a148' : '#da1e28' }}>{tr.status}</span>
               </div>
-              <div style={{ display: 'flex', gap: 12, fontSize: 13, marginTop: 6 }}>
+              <div style={{ display: 'flex', gap: 12, fontSize: 13, marginTop: 6, flexWrap: 'wrap' }}>
+                <span>Ouvert: {fmt(tr.opened_at)}</span>
+                <span>Expiration: {fmt(tr.expires_at)}</span>
                 <span>Open: {Number(tr.open_price).toFixed(6)}</span>
                 <span>Close: {tr.close_price ? Number(tr.close_price).toFixed(6) : '-'}</span>
                 <span>PNL: <b style={{ color: isWin ? '#24a148' : '#da1e28' }}>{Number(tr.pnl).toLocaleString()} XAF</b></span>
-                <span>Ouvert: {new Date(tr.opened_at).toLocaleTimeString()}</span>
-                <span>Clôture: {new Date(tr.expires_at).toLocaleTimeString()}</span>
               </div>
             </div>
           )
