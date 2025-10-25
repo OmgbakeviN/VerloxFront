@@ -6,6 +6,7 @@ import Health from './pages/Health'
 import Company from './pages/Company'
 import Login from './pages/Login'
 import History from './pages/History'
+import Deposit from './pages/Deposit'
 import { useAuth } from './auth/AuthProvider'
 
 // Garde simple: composant wrapper
@@ -57,7 +58,17 @@ const historyRoute = createRoute({
   ),
 })
 
-const routeTree = rootRoute.addChildren([indexRoute, loginRoute, healthRoute, companyRoute, historyRoute])
+const depositRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/deposit',
+  component: () => (
+    <RequireAuth>
+      <Deposit />
+    </RequireAuth>
+  ),
+})
+
+const routeTree = rootRoute.addChildren([indexRoute, loginRoute, healthRoute, companyRoute, historyRoute, depositRoute])
 
 export const router = createRouter({ routeTree })
 

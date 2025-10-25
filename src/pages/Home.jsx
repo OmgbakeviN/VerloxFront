@@ -19,7 +19,7 @@ export default function Home() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['companies'],
     queryFn: async () => {
-      const res = await api.get('/companies/') // GET /api/companies/
+      const res = await api.get('/companies/')  // assure le / final !
       return res.data
     },
   })
@@ -27,13 +27,22 @@ export default function Home() {
   if (isLoading) return <p>Chargement des entreprises…</p>
   if (isError) return <p>Erreur: impossible de charger les entreprises.</p>
 
+  // 🔒 Normalisation: accepte array direct OU pagination {results: []}
+  const companies = Array.isArray(data)
+    ? data
+    : Array.isArray(data?.results)
+      ? data.results
+      : []
+
+  const isEmpty = companies.length === 0
+
   return (
     <div>
       <h2>Entreprises disponibles</h2>
-      {(!data || data.length === 0) && <p>Aucune entreprise active.</p>}
+      {isEmpty && <p>Aucune entreprise active.</p>}
 
       <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))' }}>
-        {data.map((c) => (
+        {companies.map((c) => (
           <Link
             key={c.id}
             to="/company/$symbol"

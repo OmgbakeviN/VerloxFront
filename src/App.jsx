@@ -10,11 +10,12 @@ export default function App() {
         <h1 style={{ marginRight: 'auto' }}>VerloxMarket</h1>
         <Link to="/">Home</Link>
         <Link to="/health">API Health</Link>
-        <Link to="/history">History</Link>
         {user ? (
           <>
+            <Link to="/deposit">Deposit</Link>
+            <Link to="/history">History</Link>
             <span style={{ fontSize: 14, opacity: 0.8 }}>
-              {user.email} — <strong>{Number(user.balance).toLocaleString()} {user.currency}</strong>
+              {user.email} — <strong>{Number(user.balance_vc).toLocaleString()} VC</strong>
             </span>
             <button onClick={logout} style={{ padding: '6px 10px' }}>Logout</button>
           </>

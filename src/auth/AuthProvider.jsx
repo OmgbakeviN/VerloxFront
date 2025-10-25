@@ -11,8 +11,15 @@ export function AuthProvider({ children }) {
   // Récupère /auth/me (avec access si présent; sinon tentera refresh via intercepteur si 401)
   const fetchMe = useCallback(async () => {
     try {
-      const res = await api.get('/auth/me/')
-      setUser(res.data)
+      const meAuth = await api.get('/auth/me/')
+
+      // on recuperer le solde VC
+      const meWallet = await api.get('/wallet/me/')
+      setUser({
+        email: meAuth.data.email,
+        balance_vc: meWallet.data.balance_vc,
+        rate_xaf_per_vc: meWallet.data.rate_xaf_per_vc,
+      })
     } catch {
       setUser(null)
     }

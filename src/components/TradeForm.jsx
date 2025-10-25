@@ -55,7 +55,7 @@ export default function TradeForm({ companyId, onCreated }) {
       </div>
 
       <label>
-        Montant (XAF)
+        Montant (VC)
         <input
           type="number"
           min="100"

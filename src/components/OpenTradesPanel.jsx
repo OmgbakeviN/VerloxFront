@@ -34,7 +34,7 @@ export default function OpenTradesPanel() {
           <div key={tr.id} style={{ border: '1px solid #eee', borderRadius: 8, padding: 10 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <strong>{tr.company_symbol} — {tr.direction}</strong>
-              <span>Stake: {Number(tr.stake).toLocaleString()} XAF</span>
+              <span>Stake: {Number(tr.stake).toLocaleString()} VC</span>
             </div>
             <div style={{ display: 'flex', gap: 12, fontSize: 13, marginTop: 6 }}>
               <span>Open: {Number(tr.open_price).toFixed(6)}</span>
