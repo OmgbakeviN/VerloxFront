@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../auth/AuthProvider'
 import { useNavigate } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 
 export default function Login() {
   const { login } = useAuth()
@@ -55,6 +56,12 @@ export default function Login() {
         <button type="submit" disabled={loading} style={{ padding: '8px 12px' }}>
           {loading ? 'Connexion…' : 'Se connecter'}
         </button>
+        
+        <p>
+          Pas de compte ? 
+          <Link to="/signup">Créez-en un ici</Link>
+        </p>
+
       </form>
     </div>
   )
